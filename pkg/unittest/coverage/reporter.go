@@ -1,4 +1,4 @@
-package coverage 
+package coverage
 
 import (
 	"strings"
@@ -28,7 +28,9 @@ type ResultEntry struct {
 }
 
 type CoverageEntry struct {
-	Path             string BranchesCovered  int BranchesTotal    int
+	Path             string
+	BranchesCovered  int
+	BranchesTotal    int
 	BranchesMissed   string
 	BranchesCoverage float32 // Percentage
 	ActionCovered    int
