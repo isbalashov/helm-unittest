@@ -380,6 +380,7 @@ var assertTypeMapping = map[string]assertTypeDef{
 	"matchRegexRaw":     {reflect.TypeOf(validators.MatchRegexRawValidator{}), false, true},
 	"notMatchRegexRaw":  {reflect.TypeOf(validators.MatchRegexRawValidator{}), true, true},
 	"contains":          {reflect.TypeOf(validators.ContainsValidator{}), false, true},
+	"stringContains":    {reflect.TypeOf(validators.StringContainsValidator{}), false, true},
 	"notContains":       {reflect.TypeOf(validators.ContainsValidator{}), true, true},
 	"isKind":            {reflect.TypeOf(validators.IsKindValidator{}), false, true},
 	"isAPIVersion":      {reflect.TypeOf(validators.IsAPIVersionValidator{}), false, true},

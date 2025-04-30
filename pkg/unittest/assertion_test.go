@@ -59,6 +59,7 @@ func TestAssertionUnmarshalFromYAML(t *testing.T) {
 - matchRegexRaw:
 - notMatchRegexRaw:
 - contains:
+- stringContains:
 - notContains:
 - isNull:
 - isNotNull:
@@ -124,6 +125,8 @@ func TestAssertionUnmarshaledFromYAMLWithNotTrue(t *testing.T) {
 - notMatchRegexRaw:
   not: true
 - contains:
+  not: true
+- stringContains:
   not: true
 - notContains:
   not: true
