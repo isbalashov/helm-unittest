@@ -20,7 +20,10 @@ require (
 	sigs.k8s.io/yaml v1.4.0
 )
 
-require sigs.k8s.io/randfill v1.0.0 // indirect
+require (
+	github.com/yosuke-furukawa/json5 v0.1.1 // indirect
+	sigs.k8s.io/randfill v1.0.0 // indirect
+)
 
 require (
 	dario.cat/mergo v1.0.1 // indirect

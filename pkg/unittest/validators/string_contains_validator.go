@@ -8,6 +8,7 @@ import (
 	"strings"
 
 	log "github.com/sirupsen/logrus"
+	"github.com/yosuke-furukawa/json5/encoding/json5"
 
 	"github.com/helm-unittest/helm-unittest/internal/common"
 	"github.com/helm-unittest/helm-unittest/pkg/unittest/valueutils"
@@ -91,10 +92,20 @@ func (v StringContainsValidator) validateJSON(jsonStr string, manifestIndex, ass
 
 	// Parse JSON string into a map
 	var jsonObj map[string]interface{}
-	if err := json.Unmarshal([]byte(jsonStr), &jsonObj); err != nil {
-		validateErrors = splitInfof(errorFormat, manifestIndex, assertIndex,
-			fmt.Sprintf("failed to parse JSON from '%s': %s", v.Path, err.Error()))
-		return false, validateErrors
+
+	// First try standard JSON parsing
+	err := json.Unmarshal([]byte(jsonStr), &jsonObj)
+
+	// If standard JSON parsing fails, try JSON5
+	if err != nil {
+		log.WithField("validator", "stringContains").Debugln("standard JSON parsing failed, trying JSON5")
+		err = json5.Unmarshal([]byte(jsonStr), &jsonObj)
+		if err != nil {
+			validateErrors = splitInfof(errorFormat, manifestIndex, assertIndex,
+				fmt.Sprintf("failed to parse JSON/JSON5 from '%s': %s", v.Path, err.Error()))
+			return false, validateErrors
+		}
+		log.WithField("validator", "stringContains").Debugln("successfully parsed as JSON5")
 	}
 
 	// Convert content to a map
