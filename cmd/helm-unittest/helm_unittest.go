@@ -21,7 +21,6 @@ type testOptions struct {
 	colored        bool
 	updateSnapshot bool
 	withSubChart   bool
-	withCoverage   bool
 	testFiles      []string
 	valuesFiles    []string
 	outputFile     string
@@ -153,11 +152,6 @@ func InitPluginFlags(cmd *cobra.Command) {
 	cmd.PersistentFlags().BoolVarP(
 		&testConfig.updateSnapshot, "update-snapshot", "u", false,
 		"update the snapshot cached if needed, make sure you review the change before update",
-	)
-
-	cmd.PersistentFlags().BoolVarP(
-		&testConfig.withCoverage, "coverage", "c", false,
-		"enable coverage report",
 	)
 
 	cmd.PersistentFlags().BoolVarP(
